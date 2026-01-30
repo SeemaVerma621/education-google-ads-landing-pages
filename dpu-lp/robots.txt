@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: /https://dypatil.onlinedegreecourses.co.in/

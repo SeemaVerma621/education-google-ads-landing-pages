@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Rewrite non-existing files without extension to .php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Apply X-Robots-Tag header only to .php and .html files
+<FilesMatch "\.(php|html)$">
+  Header set X-Robots-Tag "noindex, nofollow"
+</FilesMatch>

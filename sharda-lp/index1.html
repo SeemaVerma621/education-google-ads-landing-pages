@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Form</title>
+    <!-- Include jQuery (you can download it or use a CDN) -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  </head>
+  <body>
+    <form id="apiForm">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="FirstName" value="Wim" /><br />
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="LastName" value="Wenders" /><br />
+
+      <label for="email">Email:</label>
+      <input
+        type="text"
+        id="email"
+        name="EmailAddress"
+        value="wim.wenders@example.com"
+      /><br />
+
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" name="Phone" value="7777777777" /><br />
+
+      <label for="source">Source:</label>
+      <input
+        type="text"
+        id="source"
+        name="Source"
+        value="School of distance education"
+      /><br />
+
+      <label for="course">Course:</label>
+      <input
+        type="text"
+        id="course"
+        name="mx_Course_Updated_CCE"
+        value="Program Course"
+      /><br />
+
+      <label for="courseCode">Course Code:</label>
+      <input
+        type="text"
+        id="courseCode"
+        name="mx_CCE_Program_Code"
+        value="Program Code"
+      /><br />
+
+      <label for="programName">Program Name:</label>
+      <input
+        type="text"
+        id="programName"
+        name="mx_Domain_Updated_CCE"
+        value="Program Name"
+      /><br />
+
+      <label for="partnerName">Partner Name:</label>
+      <input
+        type="text"
+        id="partnerName"
+        name="mx_Partner_Name"
+        value="Aashi Gupta"
+      /><br />
+
+      <label for="searchBy">Search By:</label>
+      <input type="text" id="searchBy" name="SearchBy" value="Phone" /><br />
+
+      <input type="submit" value="Submit" />
+    </form>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('apiForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var formData = new FormData(form);
+
+      // Convert formData to JSON
+      var jsonData = {};
+      formData.forEach(function (value, key) {
+        jsonData[key] = value;
+      });
+
+      // API endpoint and parameters
+      var apiEndpoint = 'https://api-in21.leadsquared.com/v2/LeadManagement.svc/Lead.Capture';
+      var accessKey = 'u$rf5b60b2553f1b8404d3677a48a4d6d51';
+      var secretKey = '107db6bfb657f6070359ef0d1d14659d34d7c3d9';
+
+      // Make fetch request to API
+      fetch(apiEndpoint + '?accessKey=' + accessKey + '&secretKey=' + secretKey, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jsonData),
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log('API response:', data);
+          // Handle success response here
+        })
+        .catch(function (error) {
+          console.error('API error:', error);
+          // Handle error response here
+        });
+    });
+  });
+</script>
+
+  </body>
+</html>
